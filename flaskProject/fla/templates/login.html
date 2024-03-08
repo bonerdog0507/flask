@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+	<style>
+        span {
+            color: red;
+            display: block;
+        }
+        .invalidate {
+            border: 1px red solid;
+        }
+        .btn {
+            background-color: #888;
+            width: 100px;
+            height: 30px;
+            border-radius: 10px;
+            transition: all 0.3s;
+            opacity: .8;
+        }
+        .btn:hover {
+            background-color: #666;
+            cursor: pointer;
+            box-shadow: 1px 1px ;
+            opacity: 1;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    {% with messages = get_flashed_messages() %}
+    {% for message in messages %}
+    <span>{{ message }}</span>
+    {% endfor %}
+    {% endwith %}
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <div class="username">
+            {{ form.username.label }}
+            <br>
+            {% if form.username.errors %}
+            {% for error in form.username.errors %}
+            {{ form.username(size = 32,class='invalidate',autocomplete='off')}}
+            <span>{{ error }}</span>
+            {% endfor %}
+            {% else %}
+            {{ form.username(size= 32,autocomplete='off') }}
+            {% endif %}
+        </div>
+        <div class="password">
+            {{ form.password.label }}
+            <br>
+            {% if form.password.errors %}
+            {{ form.password(size = 32, class='invalidate') }}
+            {% for error in form.password.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+            {% else %}
+            {{ form.password(size = 32) }}
+            {% endif %}
+        </div>
+        {{ form.remember_me() }} {{ form.remember_me.label }}
+        <br>
+        {{ form.submit(class='btn') }}
+
+    </form>
+{% endblock %}

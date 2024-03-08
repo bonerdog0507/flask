@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block head %}
+<style>
+    span {
+        color: red;
+        display: block;
+    }
+
+</style>
+{% endblock %}
+
+{% block body %}
+    <form action="" novalidate method="post">
+        {{ form.hidden_tag() }}
+        <div class="username">
+            {{ form.username.label }}<br>
+            {{ form.username(size=32,autocomplete='off') }}
+            {% for error in form.username.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div class="email">
+            {{ form.email.label }}<br>
+            {{ form.email(size=32,autocomplete='off') }}
+            {% for error in form.email.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div class="password">
+            {{ form.password.label }}<br>
+            {{ form.password(size=32) }}
+            {% for error in form.password.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+       <div class="confirm-password">
+            {{ form.confirm_password.label }}<br>
+            {{ form.confirm_password(size=32) }}
+            {% for error in form.confirm_password.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+       </div>
+        {{ form.submit() }}
+    </form>
+{% endblock %}

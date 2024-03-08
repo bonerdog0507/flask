@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% block head %}
+    {% endblock %}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+
+        }
+        .nav{
+            height: 50px;
+            background-color: #888;
+            display: flex;
+            flex-direction: row-reverse;
+        }
+        .nav a,.nav span{
+            margin: auto  10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        {% if current_user.is_anonymous %}
+        <a href="{{ url_for('login') }}">登入</a>
+        <a href="{{ url_for('register')}}">註冊</a>
+        {% else %}
+        <a href="{{ url_for('logout') }}">登出</a>
+        <a>{{ current_user.username }}</a>
+        {% endif %}
+    </div>
+    {% block body %}
+    {% endblock %}
+</body>
+</html>
